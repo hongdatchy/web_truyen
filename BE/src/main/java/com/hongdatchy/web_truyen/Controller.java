@@ -133,38 +133,43 @@ public class Controller {
                 .body(resource);
     }
 
-    @PostMapping("/scanDirAndUpdateDB")
-    public ResponseEntity<Object> scanDirAndUpdateDB(@RequestBody UpdateComic updateComic) {
-        System.out.println(updateComic);
-        fileStorageService.scanDirAndUpdateDB(updateComic);
-//        // Load file as Resource
-//        Resource resource = fileStorageService.loadFileAsResource(subFolder1+"/"+subFolder2, fileName);
-//
-//        // Try to determine file's content type
-//        String contentType = null;
-//        try {
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        // Fallback to the default content type if type could not be determined
-//        if(contentType == null) {
-//            contentType = "application/octet-stream";
-//        }
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(contentType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//                .body(resource);
-        return ResponseEntity.ok("");
-    }
+//    @PostMapping("/scanDirAndUpdateDB")
+//    public ResponseEntity<Object> scanDirAndUpdateDB(@RequestBody UpdateComic updateComic) {
+//        System.out.println(updateComic);
+//        fileStorageService.scanDirAndUpdateDB(updateComic);
+////        // Load file as Resource
+////        Resource resource = fileStorageService.loadFileAsResource(subFolder1+"/"+subFolder2, fileName);
+////
+////        // Try to determine file's content type
+////        String contentType = null;
+////        try {
+////            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+////        } catch (IOException ex) {
+////            ex.printStackTrace();
+////        }
+////
+////        // Fallback to the default content type if type could not be determined
+////        if(contentType == null) {
+////            contentType = "application/octet-stream";
+////        }
+////
+////        return ResponseEntity.ok()
+////                .contentType(MediaType.parseMediaType(contentType))
+////                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+////                .body(resource);
+//        return ResponseEntity.ok("");
+//    }
 
     @GetMapping("/comic/{categoryId}")
     public ResponseEntity<Object> getListComicByCategory(@PathVariable int categoryId){
         return ResponseEntity.ok(comicRepository.findAll()
                 .stream().filter(comic -> comic.getCategoryId().equals(categoryId))
                 .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/listChapter/{nameComic}")
+    public ResponseEntity<Object> getListChapterByNameComic(@PathVariable String nameComic){
+        return ResponseEntity.ok(fileStorageService.readListFolder(nameComic));
     }
 
     @GetMapping("/category")

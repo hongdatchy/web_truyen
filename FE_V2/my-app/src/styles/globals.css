@@ -79,6 +79,8 @@
   margin: 0;
 }
 
+
+
 html,
 body {
   max-width: 100vw;
@@ -96,12 +98,65 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  /* color: inherit; */
+  text-decoration: none!important;
 }
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+}
+
+#banner{
+  min-height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-image: url(../../public/assets/images/bg_header.jpg);
+  padding: 10px;
+}
+
+#banner >div{
+  width: 100%;
+  text-align: center;
+}
+
+#banner >div .btn-menu{
+  margin-bottom: 0!important;
+}
+
+
+
+.text_blue {
+  color: #03a4ed;
+}
+
+.text_red {
+  color: #fe3f40;
+}
+
+@media (max-width: 991px){
+  #banner >div .btn-menu{
+    
+  }
+}
+
+
+.my-pdf{
+  height: max-content;
+}
+
+.my-pdf .react-pdf__Page{
+  height: max-content;
+}
+
+footer p {
+  text-align: center;
+  margin: 30px 0px 45px 0px;
+}
+
+footer p a {
+  color: #fe3f40;
 }
